@@ -1,0 +1,46 @@
+<div class="fs-4 p-3 border border-1 container mt-5 p-2 bio">
+  <%= form_with(model: recipe) do |f| %>
+    <% if recipe.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+  
+        <ul>
+          <% recipe.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <h1> New Recipe </h1>
+  
+    <div>
+      <%= f.label :name, "Name", class: "form-label fs-6" %><br>
+      <%= f.text_field :name, :placeholder => "Add Your Recipe name here...", required: true, class: "form-control" %><br>
+    </div>
+
+    <div>
+      <%= f.label :description, "Write description", class: "form-label fs-6" %>
+      <%= f.text_area :description, size: "80x7", :placeholder => "Add your description here...", required: true, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= f.label :cooking_time, "Cooking time(mins)", class: "form-label fs-6" %>
+      <%= f.number_field :cooking_time, class: "form-control mb-2" %>
+    </div>
+
+    <div>
+      <%= f.label :preparation_time, "Preparation time(mins)", class: "form-label fs-6", min:"0" %>
+      <%= f.number_field :preparation_time, class: "form-control mb-2", min:"0" %>
+    </div>
+    
+    <div class="form-check form-switch" style="margin:1rem 0;">
+        <%= f.label :public, for:'flexSwitchCheckDefault', class:"form-check-label" %>
+        <%= f.check_box :public, class:'form-check-input', id:"flexSwitchCheckDefault", role:"switch" %>
+    </div>
+  
+    <div>
+      <%= f.submit "Create Recipe", class:"btn btn-outline-info" %> |
+      <%= link_to "Back to recipes", recipes_path, class:"btn btn-outline-info" %>
+    </div>
+  <% end %>
+</div>
